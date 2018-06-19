@@ -219,7 +219,7 @@
                 headsep=10pt,%
                 footskip=25pt,
                 marginparsep=3mm,
-                marginparwidth=3mm]{geometry}
+                marginparwidth=15mm]{geometry}
 \RequirePackage[labelfont={bf,sf},%
                 labelsep=period,%
                 figurename=Fig.]{caption}
