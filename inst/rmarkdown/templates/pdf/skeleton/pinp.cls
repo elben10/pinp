@@ -109,16 +109,6 @@
 %% \end{document}
 %%%%%%%%%%%%%%%%%%%%
 
-%% Package required for equal height while in 2 columns format
-\IfFileExists{flushend.sty}
-    {\RequirePackage{flushend}}
-    {\typeout{}
-    \typeout{Package widetext error: Install the flushend package which is
-    a part of sttools bundle. Available from CTAN.}
-    \typeout{}
-    \stop
-    }
-
 %% Package required for onecolumn and twocolumn to exist on the same page.
 %% and also required for widetext environment.
 \IfFileExists{cuted.sty}
