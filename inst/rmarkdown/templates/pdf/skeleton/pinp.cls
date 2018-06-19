@@ -109,6 +109,9 @@
 %% \end{document}
 %%%%%%%%%%%%%%%%%%%%
 
+%% Package required for equal height while in 2 columns format
+
+
 %% Package required for onecolumn and twocolumn to exist on the same page.
 %% and also required for widetext environment.
 \IfFileExists{cuted.sty}
@@ -116,6 +119,14 @@
     {\typeout{}
     \typeout{Package widetext error: Install the cuted package which is
     a part of sttools bundle. Available from CTAN.}
+    \typeout{}
+    \stop
+    }
+    
+\IfFileExists{marginnote.sty}
+    {\RequirePackage{marginnote}}
+    {\typeout{}
+    \typeout{Package marginnote error: Install the marginnote package. Available from CTAN.}
     \typeout{}
     \stop
     }
@@ -196,14 +207,19 @@
 \RequirePackage[noend]{algpseudocode}
 \RequirePackage{changepage}
 \RequirePackage[twoside,%
-				includeheadfoot,
+				letterpaper,includeheadfoot,%
+				layoutsize={8.125in,10.875in},%
+                layouthoffset=0.1875in,%
+                layoutvoffset=0.0625in,%
                 left=38.5pt,%
                 right=43pt,%
                 top=43pt,% 10pt provided by headsep
                 bottom=32pt,%
                 headheight=0pt,% No Header
                 headsep=10pt,%
-                footskip=25pt]{geometry}
+                footskip=25pt,
+                marginparsep=3mm,
+                marginparwidth=3mm]{geometry}
 \RequirePackage[labelfont={bf,sf},%
                 labelsep=period,%
                 figurename=Fig.]{caption}
@@ -629,6 +645,22 @@ THE ABSTRACT\vskip12pt}\let\go\relax\fi
 
 %% microtype with mathdesign, microtype already loaded
 \usepackage[bitstream-charter]{mathdesign} %% cf http://www.khirevich.com/latex/font/
+
+\renewcommand*{\marginfont}{\tiny\color{red}\sffamily}
+
+\makeatletter
+\let\oldmarginnote\marginnote
+\renewcommand*{\marginnote}[1]{%
+   \begingroup%
+   \ifodd\value{page}
+     \if@firstcolumn\else\reversemarginpar\fi
+   \else
+     \if@firstcolumn\reversemarginpar\fi
+   \fi
+   \oldmarginnote{#1}%
+   \endgroup%
+}
+\makeatother
  
 \endinput
 
